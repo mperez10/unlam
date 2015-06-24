@@ -39,14 +39,13 @@ public class Grafo {
 		while(!cola.isEmpty()) {
 			// Hasta que la cola esta vacia:
 			actual = cola.poll();
-			for (Nodo vecino : actual.getVecinos().keySet()) {
+			for (Nodo vecino : actual.getVecinos().keySet())
 				// Se agregan a la cola todos los nodos vecinos
 				// que no hayan sido visitados anteriormente.
 				if(!vecino.visitado()) {
 					cola.offer(vecino);
 					vecino.setVisitado(true);
 				}
-			}
 		}
 	}
 	
