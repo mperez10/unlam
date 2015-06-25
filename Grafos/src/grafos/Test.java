@@ -7,7 +7,6 @@ public class Test {
 	public static void main(String[] args) {
 		ArrayList<Arista> camino = null;
 		int inf = Grafo.INFINITO;
-<<<<<<< HEAD
 		int matriz1[][] = {  {0, 2, 4},
 							{2, 0, 5},
 							{4, 5, 0}  };
@@ -20,12 +19,6 @@ public class Test {
 							{inf, 4, inf, inf, inf, 2, 0, 3},
 							{9, inf, inf, inf, inf, 1, 3, 0}  };
 		Grafo g = new Grafo(matriz2);
-=======
-		int matriz[][] = {  {0, 2, 4},
-				    {inf, 0, 5},
-				    {inf, inf, 0}  };
-		Grafo g = new Grafo(matriz);
->>>>>>> origin/master
 //		g.DFS(g.getNodo(0));
 //		g.BFS(g.getNodo(0));
 //		g.resetEstadoNodos();
