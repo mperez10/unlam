@@ -57,9 +57,8 @@ public class Grafo {
 	
 	public static int costoCamino(ArrayList<Arista> camino) {
 		int costoTotal = 0;
-		for (Arista arista : camino) {
+		for (Arista arista : camino)
 			costoTotal += arista.getPeso();
-		}
 		return costoTotal;
 	}
 	
