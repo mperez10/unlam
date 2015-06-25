@@ -5,8 +5,10 @@ import java.util.Hashtable;
 public class Nodo {
 	private Hashtable<Nodo, Integer> vecinos;
 	private boolean visitado = false;
+	private int nroNodo;
 	
-	public Nodo() {
+	public Nodo(int n) {
+		nroNodo = n;
 		vecinos = new Hashtable<Nodo, Integer>();
 	}
 	
@@ -14,8 +16,12 @@ public class Nodo {
 		vecinos.put(nodo, costo);
 	}
 	
-	public void getCosto(Nodo nodo) {
-		vecinos.get(nodo);
+	public boolean esVecino(Nodo nodo) {
+		return vecinos.containsKey(nodo);
+	}
+	
+	public int getCosto(Nodo vecino) {
+		return vecinos.get(vecino);
 	}
 	
 	public Hashtable<Nodo, Integer> getVecinos() {
@@ -28,5 +34,9 @@ public class Nodo {
 	
 	public boolean visitado() {
 		return visitado;
+	}
+	
+	public int getNodo() {
+		return nroNodo;
 	}
 }
