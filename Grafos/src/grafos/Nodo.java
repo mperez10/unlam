@@ -1,30 +1,34 @@
 package grafos;
 
-import java.util.Hashtable;
+import java.util.ArrayList;
 
 public class Nodo {
-	private Hashtable<Nodo, Integer> vecinos;
+	private ArrayList<Arista> vecinos;
 	private boolean visitado = false;
 	private int nroNodo;
 	
 	public Nodo(int n) {
 		nroNodo = n;
-		vecinos = new Hashtable<Nodo, Integer>();
+		vecinos = new ArrayList<Arista>();
 	}
 	
 	public void addVecino(Nodo nodo, int costo) {
-		vecinos.put(nodo, costo);
+		vecinos.add( new Arista(nodo, costo));
 	}
 	
 	public boolean esVecino(Nodo nodo) {
-		return vecinos.containsKey(nodo);
+		return vecinos.contains(nodo);
 	}
 	
 	public int getCosto(Nodo vecino) {
-		return vecinos.get(vecino);
+		for (Arista arista : vecinos) {
+			if(arista.getExtremo() == vecino)
+				return arista.getPeso();
+		}
+		return Grafo.INFINITO;
 	}
 	
-	public Hashtable<Nodo, Integer> getVecinos() {
+	public ArrayList<Arista> getVecinos() {
 		return vecinos;
 	}
 	
@@ -36,7 +40,7 @@ public class Nodo {
 		return visitado;
 	}
 	
-	public int getNodo() {
+	public int getNroNodo() {
 		return nroNodo;
 	}
 }

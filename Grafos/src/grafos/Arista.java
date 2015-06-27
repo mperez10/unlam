@@ -2,12 +2,11 @@ package grafos;
 
 public class Arista implements Comparable<Arista> {
 	
-	private Nodo extremo1, extremo2;
+	private Nodo extremo;
 	private int peso;
 	
-	public Arista(Nodo i, Nodo j, int p) {
-		extremo1 = i;
-		extremo2 = j;
+	public Arista(Nodo i, int p) {
+		extremo = i;
 		peso = p;
 	}
 
@@ -16,12 +15,8 @@ public class Arista implements Comparable<Arista> {
 		return this.peso - otraArista.getPeso();
 	}
 	
-	public Nodo getExtremo1() {
-		return extremo1;
-	}
-	
-	public Nodo getExtremo2() {
-		return extremo2;
+	public Nodo getExtremo() {
+		return extremo;
 	}
 	
 	public int getPeso() {

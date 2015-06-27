@@ -1,33 +1,30 @@
 package grafos;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Grafo {
 	
 	public static final int INFINITO = Integer.MAX_VALUE;
 	private ArrayList<Nodo> nodos;
-	private ArrayList<Arista> aristas;
 	
 	public Grafo(int adyacencia[][]) {
 		// Constructor en base a matriz de adyacencia.
 		nodos = new ArrayList<Nodo>(adyacencia.length);
-		aristas = new ArrayList<Arista>();
 		// Se agregan los nodos
 		for(int i = 0; i < adyacencia.length; i++)
 			nodos.add(new Nodo(i));
 		// Se vinculan los nodos y se crean las aristas correspondientes
 		for (int i = 0; i < adyacencia.length; i++)
-			for (int j = 0; j < adyacencia.length; j++) {
+			for (int j = 0; j < adyacencia.length; j++)
 				if(i != j && adyacencia[i][j] != INFINITO)
 					nodos.get(i).addVecino(nodos.get(j), adyacencia[i][j]);
-				if(nodos.get(i).esVecino(nodos.get(j)) && nodos.get(j).esVecino(nodos.get(i)))
-					aristas.add( new Arista(nodos.get(i), nodos.get(j), nodos.get(i).getCosto(nodos.get(j))));
-			}
 	}
 	
+	
+	/* TODO ACTUALIZAR PARA LA NUEVA ESTRUCTURA
 	public ArrayList<Arista> kruskal() {
 		Hashtable<Nodo, Integer> caminoNodos = new Hashtable<Nodo, Integer>();
 		ArrayList<Arista> caminoAristas = new ArrayList<Arista>();
@@ -54,6 +51,27 @@ public class Grafo {
 		}
 		return caminoAristas;
 	}
+	*/
+	
+	public ArrayList<Arista> prim(Nodo inicio) { // TODO AGREGAR COMO OBTENER EL CAMINO
+		PriorityQueue<Arista> cola = new PriorityQueue<Arista>();
+		ArrayList<Arista> solucion = new ArrayList<Arista>();
+		Arista vecino;
+//		int padre[] = new int[nodos.size()];
+//		padre[inicio.getNroNodo()] = inicio.getNroNodo();
+		while(!cola.isEmpty()) {
+			vecino = cola.poll();
+			for (Arista arista : vecino.getExtremo().getVecinos()) {
+				if(!solucion.contains(arista)) {
+					solucion.add(arista);
+					for (Arista aristaDelVecino : inicio.getVecinos())
+						if(!solucion.contains(aristaDelVecino))
+							cola.add(aristaDelVecino);
+				}
+			}
+		}
+		return solucion;
+	}
 	
 	public static int costoCamino(ArrayList<Arista> camino) {
 		int costoTotal = 0;
@@ -63,23 +81,27 @@ public class Grafo {
 	}
 	
 	public void DFS(Nodo inicio) {
+		Nodo vecino;
 		inicio.setVisitado(true);
-		for (Nodo vecino : inicio.getVecinos().keySet())
+		for (Arista arista : inicio.getVecinos()) {
 			// Para cada nodo vecino que no fue anteriormente
 			// visitado, se realiza DFS.
+			vecino = arista.getExtremo();
 			if(!vecino.visitado())
 				DFS(vecino);
+		}
 	}
 	
 	public void BFS(Nodo inicio) {
 		Queue<Nodo> cola = new LinkedList<Nodo>();
-		Nodo actual;
+		Nodo actual, vecino = null;
 		cola.offer(inicio);
 		inicio.setVisitado(true);
 		while(!cola.isEmpty()) {
 			// Hasta que la cola esta vacia:
 			actual = cola.poll();
-			for (Nodo vecino : actual.getVecinos().keySet())
+			for (Arista arista : actual.getVecinos())
+				vecino = arista.getExtremo();
 				// Se agregan a la cola todos los nodos vecinos
 				// que no hayan sido visitados anteriormente.
 				if(!vecino.visitado()) {

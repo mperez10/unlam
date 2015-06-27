@@ -22,7 +22,7 @@ public class Test {
 //		g.DFS(g.getNodo(0));
 //		g.BFS(g.getNodo(0));
 //		g.resetEstadoNodos();
-		camino = g.kruskal();
+//		camino = g.kruskal();
 		System.out.println(Grafo.costoCamino(camino));
 	}
 }
