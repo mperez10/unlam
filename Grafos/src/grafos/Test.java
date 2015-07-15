@@ -31,15 +31,21 @@ public class Test {
 							   {X, X, 0, X, 1},
 							   {X, X, X, 0, 5},
 							   {X, X, X, X, 0} };
-		Grafo g = new Grafo(matriz1);
+		int ejPrim[][] = { {0, 2, 5, X, X},
+						   {2, 0, X, 2, 4},
+						   {5, X, 0, X, X},
+						   {X, 2, X, 0, 3},
+						   {X, 4, X, 3, 0} };
+		Grafo g = new Grafo(ejPrim);
 //		g.DFS(g.getNodo(0));
 //		g.BFS(g.getNodo(0));
 //		g.resetEstadoNodos();
-		solucion = g.kruskal();
+//		solucion = g.kruskal();
 //		System.out.println(Grafo.costoCamino(camino));
 //		System.out.println(g.colorear());
 //		g.dijkstra(g.getNodo(0));
 //		g.floyd();
+		solucion = g.prim(g.getNodo(0));
 		for (Arista arista : solucion) {
 			System.out.println(arista.toString());
 		}

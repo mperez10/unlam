@@ -17,6 +17,10 @@ public class Arista implements Comparable<Arista> {
 			return vertice1;
 	}
 
+	public int getPeso() {
+		return peso;
+	}
+
 	public boolean unVerticeNoVisitado() {
 		if (!vertice1.visitado() || !vertice2.visitado())
 			return true;
@@ -52,6 +56,15 @@ public class Arista implements Comparable<Arista> {
 	@Override
 	public int hashCode() {
 		return (vertice1.getNroNodo() + vertice2.getNroNodo()) * peso;
+	}
+
+	public Nodo getVerticeNoVisitado() {
+		if(!vertice1.visitado())
+			return vertice1;
+		else if(!vertice2.visitado())
+			return vertice2;
+		else
+			return null;
 	}
 	
 	

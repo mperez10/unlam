@@ -1,7 +1,6 @@
 package grafos;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -31,7 +30,7 @@ public class Grafo {
 		for (int i = 0; i < adyacencia.length; i++)
 			for (int j = 0; j < adyacencia.length; j++)
 				if(i != j && adyacencia[i][j] != INFINITO) {
-					nodos.get(i).addVecino(nodos.get(j), adyacencia[i][j]);
+					nodos.get(i).addVecino(nodos.get(i), nodos.get(j), adyacencia[i][j]);
 					aristasUnicas.add(new Arista(nodos.get(i), nodos.get(j), adyacencia[i][j]));
 				}
 		aristas = new ArrayList<Arista>(aristasUnicas);
@@ -42,7 +41,7 @@ public class Grafo {
 	}
 	
 	public void unirVecino(int n, int v, int costo) {
-		nodos.get(n).addVecino(nodos.get(v), costo);
+		nodos.get(n).addVecino(nodos.get(n), nodos.get(v), costo);
 	}
 	
 	public ArrayList<Arista> kruskal() {
@@ -78,17 +77,17 @@ public class Grafo {
 		cola.offer(inicio);
 		while(!cola.isEmpty()) {
 			actual = cola.poll();
-			for (Enlace vecino : actual.getVecinos()) {
+			for (Arista aristaVecino : actual.getAristasVecinos()) {
+				nodoVecino = aristaVecino.otro(actual);
 				// Agrega todos los vecinos a la cola
-				cola.offer(vecino.getExtremo());
-				nodoVecino = vecino.getExtremo();
+				cola.offer(nodoVecino);
 				nroNodoVecino = nodoVecino.getNroNodo();
 				// Si la distancia al nodo vecino más la distancia al nodo actual
 				// desde el nodo inicial es menor que la distancia actual al nodo
 				// vecino desde el nodo inicial, entonces se cambia por la menor
 				// y también se cambia el padre del nodo vecino para que sea el nodo actual.
-				if((vecino.getPeso() + distancia[actual.getNroNodo()]) < distancia[nroNodoVecino]) {
-					distancia[nroNodoVecino] = vecino.getPeso() + distancia[actual.getNroNodo()];
+				if((aristaVecino.getPeso() + distancia[actual.getNroNodo()]) < distancia[nroNodoVecino]) {
+					distancia[nroNodoVecino] = aristaVecino.getPeso() + distancia[actual.getNroNodo()];
 					padre[nroNodoVecino] = actual.getNroNodo();
 				}
 			}
@@ -116,8 +115,8 @@ public class Grafo {
 			pintar = true;
 			for (Nodo actual : nodos) {
 				if(!actual.estaPintado()) {
-					for (Enlace vecino : actual.getVecinos())
-						if (vecino.getExtremo().getColor() == colorActual)
+					for (Arista vecino : actual.getAristasVecinos())
+						if (vecino.otro(actual).getColor() == colorActual)
 							pintar = false;
 					if (pintar) {
 						actual.setColor(colorActual);
@@ -129,67 +128,28 @@ public class Grafo {
 		return colorActual;
 	}
 	
-	// Variación de coloreo para ejercicio de regalos:
-	public ArrayList<Nodo> nodosNoConflictivos() {
-		int cantNodosColoreados = 0, colorActual = 0;
-		boolean pintar;
-		ArrayList<ArrayList<Nodo>> listasPorColores = new ArrayList<ArrayList<Nodo>>();
-		ArrayList<Nodo> listaDeNodosColorActual;
-		nodos.sort(null);
-		Collections.reverse(nodos);
-		while(cantNodosColoreados < nodos.size()) {
-			listasPorColores.add(new ArrayList<Nodo>());
-			listaDeNodosColorActual = listasPorColores.get(colorActual);
-			for (Nodo actual : nodos) {
-				if(!actual.estaPintado()) {
-					pintar = true;
-					for (Enlace vecino : actual.getVecinos())
-						if (vecino.getExtremo().getColor() == colorActual)
-							pintar = false;
-					if (pintar) {
-						listaDeNodosColorActual.add(actual);
-						actual.setColor(colorActual);
-						cantNodosColoreados++;
-					}
-				}
-			}
-			colorActual++;
-		}
-		
-		int arrayConMayorCantNodos = 0, mayorCantNodos = 0, i = 0;
-		for (ArrayList<Nodo> array : listasPorColores) {
-			if(array.size() > mayorCantNodos) {
-				arrayConMayorCantNodos = i;
-				mayorCantNodos = array.size();
-			}
-			i++;
-		}
-		return listasPorColores.get(arrayConMayorCantNodos);
-	}
-	
-	public ArrayList<Enlace> prim(Nodo inicio) { // TODO AGREGAR COMO OBTENER EL CAMINO
-		PriorityQueue<Enlace> cola = new PriorityQueue<Enlace>();
-		ArrayList<Enlace> solucion = new ArrayList<Enlace>();
-		Enlace vecino;
-//		int padre[] = new int[nodos.size()];
-//		padre[inicio.getNroNodo()] = inicio.getNroNodo();
+	public ArrayList<Arista> prim(Nodo inicio) {
+		PriorityQueue<Arista> cola = new PriorityQueue<Arista>(inicio.getAristasVecinos());
+		ArrayList<Arista> solucion = new ArrayList<Arista>();
+		Arista aristaActualVecino;
+		Nodo nodoActual = inicio;
+		inicio.setVisitado(true);
 		while(!cola.isEmpty()) {
-			vecino = cola.poll();
-			for (Enlace arista : vecino.getExtremo().getVecinos()) {
-				if(!solucion.contains(arista)) {
-					solucion.add(arista);
-					for (Enlace aristaDelVecino : inicio.getVecinos())
-						if(!solucion.contains(aristaDelVecino))
-							cola.add(aristaDelVecino);
-				}
+			aristaActualVecino = cola.poll();
+			if((nodoActual = aristaActualVecino.getVerticeNoVisitado()) != null) {
+				solucion.add(aristaActualVecino);
+				aristaActualVecino.verticesVisitados();
+				for (Arista aristaDelVecino : nodoActual.getAristasVecinos())
+					if(!solucion.contains(aristaDelVecino))
+						cola.add(aristaDelVecino);
 			}
 		}
 		return solucion;
 	}
 	
-	public static int costoCamino(ArrayList<Enlace> camino) {
+	public static int costoCamino(ArrayList<Arista> camino) {
 		int costoTotal = 0;
-		for (Enlace arista : camino)
+		for (Arista arista : camino)
 			costoTotal += arista.getPeso();
 		return costoTotal;
 	}
@@ -197,10 +157,10 @@ public class Grafo {
 	public void DFS(Nodo inicio) {
 		Nodo vecino;
 		inicio.setVisitado(true);
-		for (Enlace arista : inicio.getVecinos()) {
+		for (Arista aristaVecino : inicio.getAristasVecinos()) {
 			// Para cada nodo vecino que no fue anteriormente
 			// visitado, se realiza DFS.
-			vecino = arista.getExtremo();
+			vecino = aristaVecino.otro(inicio);
 			if(!vecino.visitado())
 				DFS(vecino);
 		}
@@ -214,8 +174,8 @@ public class Grafo {
 		while(!cola.isEmpty()) {
 			// Hasta que la cola esta vacia:
 			actual = cola.poll();
-			for (Enlace arista : actual.getVecinos()) {
-				vecino = arista.getExtremo();
+			for (Arista aristaVecino : actual.getAristasVecinos()) {
+				vecino = aristaVecino.otro(actual);
 				// Se agregan a la cola todos los nodos vecinos
 				// que no hayan sido visitados anteriormente.
 				if(!vecino.visitado()) {
