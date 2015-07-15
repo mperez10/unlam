@@ -35,7 +35,14 @@ public class Arista implements Comparable<Arista> {
 	
 	@Override
 	public String toString() {
-		return vertice1.getNroNodo() + " <-> " + vertice2.getNroNodo();
+		if(vertice1.getAristasVecinos().contains(this)) {
+			if(!vertice2.getAristasVecinos().contains(this))
+				return vertice1.getNroNodo() + " --> " + vertice2.getNroNodo();
+			else
+				return vertice1.getNroNodo() + " <-> " + vertice2.getNroNodo();
+		}
+		else
+			return vertice2.getNroNodo() + " --> " + vertice1.getNroNodo();
 	}
 
 	@Override
@@ -46,8 +53,12 @@ public class Arista implements Comparable<Arista> {
 	@Override
 	public boolean equals(Object obj) {
 		Arista otro = (Arista) obj;
-		if (this.vertice1.getNroNodo() == otro.vertice2.getNroNodo() &&
-			this.vertice2.getNroNodo() == otro.vertice1.getNroNodo())
+		int nroVertice1 = this.vertice1.getNroNodo(),
+			nroVertice2 = this.vertice2.getNroNodo(),
+			nroVerticeOtro1 = otro.vertice1.getNroNodo(),
+			nroVerticeOtro2 = otro.vertice2.getNroNodo();
+		if (nroVertice1 == nroVerticeOtro1 && nroVertice2 == nroVerticeOtro2 ||
+			nroVertice1 == nroVerticeOtro2 && nroVertice2 == nroVerticeOtro1)
 			return true;
 		else
 			return false;
