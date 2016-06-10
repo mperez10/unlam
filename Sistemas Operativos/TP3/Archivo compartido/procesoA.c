@@ -9,15 +9,15 @@
 #define CANT_MENSAJES 1000
 
 void imprimir(struct rusage *ru, time_t *t_total) {
-	printf("Tiempo reloj: %ld nanosegundos\n", *t_total);
-	printf("Tiempo CPU sistema total: %ld microsegundos\n", ru->ru_stime.tv_usec);
-	printf("Tiempo CPU usuario total: %ld microsegundos\n", ru->ru_utime.tv_usec);
-	printf("Cantidad de Soft Page Faults: %ld \n", ru->ru_minflt);
-	printf("Cantidad de Hard Page Faults: %ld \n", ru->ru_majflt);
-	printf("Operaciones de entrada (en bloques): %ld \n", ru->ru_inblock);
-	printf("Operaciones de salida (en bloques): %ld \n", ru->ru_oublock);
-	printf("Mensajes IPC enviados: %ld \n", ru->ru_msgsnd);
-	printf("Mensajes IPC recibidos: %ld \n", ru->ru_msgrcv);
+    printf("Tiempo reloj: %ld nanosegundos\n", *t_total);
+    printf("Tiempo CPU sistema total: %ld microsegundos\n", ru->ru_stime.tv_usec);
+    printf("Tiempo CPU usuario total: %ld microsegundos\n", ru->ru_utime.tv_usec);
+    printf("Cantidad de Soft Page Faults: %ld \n", ru->ru_minflt);
+    printf("Cantidad de Hard Page Faults: %ld \n", ru->ru_majflt);
+    printf("Operaciones de entrada (en bloques): %ld \n", ru->ru_inblock);
+    printf("Operaciones de salida (en bloques): %ld \n", ru->ru_oublock);
+    printf("Mensajes IPC enviados: %ld \n", ru->ru_msgsnd);
+    printf("Mensajes IPC recibidos: %ld \n", ru->ru_msgrcv);
 }
 
 int main()
@@ -30,14 +30,14 @@ int main()
     struct stat st;
     off_t old_size;
     struct timespec inicio, fin;
-	time_t t_total;
-	struct rusage ru;
+    time_t t_total;
+    struct rusage ru;
 
-	clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
-	// Se crean y/o vacian los archivos
-	f1 = fopen(f1_dir, "w");
-	fclose(f1);
+    // Se crean y/o vacian los archivos
+    f1 = fopen(f1_dir, "w");
+    fclose(f1);
     f2 = fopen(f2_dir, "w");
     fclose(f2);
 

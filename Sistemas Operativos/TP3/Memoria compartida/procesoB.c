@@ -15,29 +15,29 @@
 #define TAM_BUFFER 100
 
 void imprimir(struct rusage *ru, time_t *t_total) {
-	printf("Tiempo reloj: %ld nanosegundos\n", *t_total);
-	printf("Tiempo CPU sistema total: %ld microsegundos\n", ru->ru_stime.tv_usec);
-	printf("Tiempo CPU usuario total: %ld microsegundos\n", ru->ru_utime.tv_usec);
-	printf("Cantidad de Soft Page Faults: %ld \n", ru->ru_minflt);
-	printf("Cantidad de Hard Page Faults: %ld \n", ru->ru_majflt);
-	printf("Operaciones de entrada (en bloques): %ld \n", ru->ru_inblock);
-	printf("Operaciones de salida (en bloques): %ld \n", ru->ru_oublock);
-	printf("Mensajes IPC enviados: %ld \n", ru->ru_msgsnd);
-	printf("Mensajes IPC recibidos: %ld \n", ru->ru_msgrcv);
+    printf("Tiempo reloj: %ld nanosegundos\n", *t_total);
+    printf("Tiempo CPU sistema total: %ld microsegundos\n", ru->ru_stime.tv_usec);
+    printf("Tiempo CPU usuario total: %ld microsegundos\n", ru->ru_utime.tv_usec);
+    printf("Cantidad de Soft Page Faults: %ld \n", ru->ru_minflt);
+    printf("Cantidad de Hard Page Faults: %ld \n", ru->ru_majflt);
+    printf("Operaciones de entrada (en bloques): %ld \n", ru->ru_inblock);
+    printf("Operaciones de salida (en bloques): %ld \n", ru->ru_oublock);
+    printf("Mensajes IPC enviados: %ld \n", ru->ru_msgsnd);
+    printf("Mensajes IPC recibidos: %ld \n", ru->ru_msgrcv);
 }
 
 int main()
 {
     char msg[] = "B", ans[sizeof(msg)];
     struct timespec inicio, fin;
-	time_t t_total;
-	struct rusage ru;
+    time_t t_total;
+    struct rusage ru;
     sem_t *sem_x = sem_open("/sem_x", 0),
             *sem_y = sem_open("/sem_y", 0);
     int id = shmget((key_t)654, CANT_MENSAJES*sizeof(msg), IPC_CREAT | 0666);
     char (*vector)[sizeof(msg)] = (char *) shmat(id, NULL, 0);
 
-	clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
     for(int i = 0; i < CANT_MENSAJES; i++)
     {
