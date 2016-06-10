@@ -33,9 +33,9 @@ int main()
 	time_t t_total;
     struct rusage ru;
 
-   	clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
+	clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
-    f1 = fopen(f1_dir, "r");
+	f1 = fopen(f1_dir, "r");
     f2 = fopen(f2_dir, "a");
 
     old_size = 0;

@@ -62,6 +62,9 @@ int main()
     fclose(f1);
     fclose(f2);
 
+    remove(f1_dir);
+    remove(f2_dir);
+
     getrusage(RUSAGE_SELF, &ru);
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);
     t_total = fin.tv_nsec - inicio.tv_nsec;
