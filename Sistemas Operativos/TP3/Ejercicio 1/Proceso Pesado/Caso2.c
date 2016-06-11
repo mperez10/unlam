@@ -8,22 +8,23 @@
 #include <sys/time.h>
 
 #define CANT_PROCESOS 1000
+#define TAM_ARRAY 1000000
 
 void inicializar(int *array) {
     srand(time(NULL));
-    for (int i = 0; i < 10000; i++)
+    for (int i = 0; i < TAM_ARRAY; i++)
         array[i] = rand();
 }
 
 void escritura(int *array) {
     srand(time(NULL));
-    for (int i = 0; i < 10000; i++)
+    for (int i = 0; i < TAM_ARRAY; i++)
         array[i] *= ( rand() + 2);
 }
 
 void imprimir(struct rusage *ru, time_t *t_total, time_t *t_prom, long double *sprom, long double *uprom) {
-    printf("Tiempo reloj: %ld nanosegundos\n", *t_total);
-    printf("Tiempo reloj promedio: %ld nanosegundos\n", *t_prom);
+    printf("Tiempo reloj: %ld microsegundos\n", *t_total);
+    printf("Tiempo reloj promedio: %ld microsegundos\n", *t_prom);
     printf("Tiempo CPU sistema total: %ld microsegundos\n", ru->ru_stime.tv_usec);
     printf("Tiempo CPU usuario total: %ld microsegundos\n", ru->ru_utime.tv_usec);
     printf("Tiempo CPU sistema promedio: %Lf microsegundos\n", *sprom);
@@ -86,16 +87,17 @@ int caso2(int *array) {
         t_total = fin.tv_nsec - inicio.tv_nsec; // nanosegundos
         if (t_total < 0)
             t_total += 1000000000;
-        t_prom = ((long double)t_total) / CANT_PROCESOS;
-        sprom = ((long double)acum.ru_stime.tv_usec) / CANT_PROCESOS;
-        uprom = ((long double)acum.ru_utime.tv_usec) / CANT_PROCESOS;
+        t_total = t_total / 1000 + 1000000*(fin.tv_sec - inicio.tv_sec); // convierte a microsegundos
+        t_prom = t_total / CANT_PROCESOS; // se desprecia un valor infimo
+        sprom = acum.ru_stime.tv_usec / CANT_PROCESOS;
+        uprom = acum.ru_utime.tv_usec / CANT_PROCESOS;
         imprimir(&acum, &t_total, &t_prom, &sprom, &uprom);
     }
     return 0;
 }
 
 int main() {
-    int array[10000];
+    int array[TAM_ARRAY];
     inicializar(array);
     printf("------------ Caso 2 ------------\n");
     caso2(array);

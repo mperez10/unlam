@@ -1,0 +1,153 @@
+EJERCICIO 1:
+
+------------ Caso 1 ------------
+Tiempo reloj: 7780545 microsegundos
+Tiempo reloj promedio: 7780 microsegundos
+Tiempo CPU sistema total: 0 microsegundos
+Tiempo CPU usuario total: 4000000 microsegundos
+Tiempo CPU sistema promedio: 0.000000 microsegundos
+Tiempo CPU usuario promedio: 4000.000000 microsegundos
+Cantidad de Soft Page Faults: 23000 
+Cantidad de Hard Page Faults: 0 
+Cantidad de señales recibidas: 0 
+Cambios de contexto voluntarios: 1000 
+Cambios de contexto involuntarios: 0 
+
+------------ Caso 2 ------------
+Tiempo reloj: 27769383 microsegundos
+Tiempo reloj promedio: 27769 microsegundos
+Tiempo CPU sistema total: 0 microsegundos
+Tiempo CPU usuario total: 24000000 microsegundos
+Tiempo CPU sistema promedio: 0.000000 microsegundos
+Tiempo CPU usuario promedio: 24000.000000 microsegundos
+Cantidad de Soft Page Faults: 485000 
+Cantidad de Hard Page Faults: 0 
+Cantidad de señales recibidas: 0 
+Cambios de contexto voluntarios: 1000 
+Cambios de contexto involuntarios: 2000 
+
+------------ Caso 3 ------------
+Tiempo reloj: 6797810 microsegundos
+Tiempo reloj promedio: 6797 microsegundos
+Tiempo CPU sistema total: 0 microsegundos
+Tiempo CPU usuario total: 1688000 microsegundos
+Tiempo CPU sistema promedio: 0.000000 microsegundos
+Tiempo CPU usuario promedio: 1688.000000 microsegundos
+Cantidad de Soft Page Faults: 21 
+Cantidad de Hard Page Faults: 0 
+Cantidad de señales recibidas: 0 
+Cambios de contexto voluntarios: 0 
+Cambios de contexto involuntarios: 485 
+
+------------ Caso 4 ------------
+Tiempo reloj: 31523854 microsegundos
+Tiempo reloj promedio: 31523 microsegundos
+Tiempo CPU sistema total: 0 microsegundos
+Tiempo CPU usuario total: 26352000 microsegundos
+Tiempo CPU sistema promedio: 0.000000 microsegundos
+Tiempo CPU usuario promedio: 26352.000000 microsegundos
+Cantidad de Soft Page Faults: 21 
+Cantidad de Hard Page Faults: 0 
+Cantidad de señales recibidas: 0 
+Cambios de contexto voluntarios: 0 
+Cambios de contexto involuntarios: 2653 
+
+
+
+EJERCICIO 2:
+
+ARCHIVO COMPARTIDO:
+
+------------ Proceso A ------------
+Tiempo reloj: 1710608 microsegundos
+Tiempo CPU sistema total: 624000 microsegundos
+Tiempo CPU usuario total: 84000 microsegundos
+Cantidad de Soft Page Faults: 81 
+Cantidad de Hard Page Faults: 0 
+Operaciones de entrada (en bloques): 0 
+Operaciones de salida (en bloques): 8 
+Mensajes IPC enviados: 0 
+Mensajes IPC recibidos: 0 
+
+------------ Proceso B ------------
+Tiempo reloj: 18688 microsegundos
+Tiempo CPU sistema total: 16000 microsegundos
+Tiempo CPU usuario total: 0 microsegundos
+Cantidad de Soft Page Faults: 78 
+Cantidad de Hard Page Faults: 0 
+Operaciones de entrada (en bloques): 0 
+Operaciones de salida (en bloques): 8 
+Mensajes IPC enviados: 0 
+Mensajes IPC recibidos: 0 
+
+FIFO COMPARTIDO:
+
+------------ Proceso A ------------
+Tiempo reloj: 717854 microsegundos
+Tiempo CPU sistema total: 4000 microsegundos
+Tiempo CPU usuario total: 4000 microsegundos
+Cantidad de Soft Page Faults: 73 
+Cantidad de Hard Page Faults: 0 
+Operaciones de entrada (en bloques): 0 
+Operaciones de salida (en bloques): 0 
+Mensajes IPC enviados: 0 
+Mensajes IPC recibidos: 0 
+
+------------ Proceso B ------------
+Tiempo reloj: 6466 microsegundos
+Tiempo CPU sistema total: 4000 microsegundos
+Tiempo CPU usuario total: 0 microsegundos
+Cantidad de Soft Page Faults: 73 
+Cantidad de Hard Page Faults: 0 
+Operaciones de entrada (en bloques): 0 
+Operaciones de salida (en bloques): 0 
+Mensajes IPC enviados: 0 
+Mensajes IPC recibidos: 0 
+
+MEMORIA COMPARTIDA:
+
+------------ Proceso A ------------
+Tiempo reloj: 1934609 microsegundos
+Tiempo CPU sistema total: 12000 microsegundos
+Tiempo CPU usuario total: 0 microsegundos
+Cantidad de Soft Page Faults: 89 
+Cantidad de Hard Page Faults: 0 
+Operaciones de entrada (en bloques): 0 
+Operaciones de salida (en bloques): 0 
+Mensajes IPC enviados: 0 
+Mensajes IPC recibidos: 0 
+
+------------ Proceso B ------------
+Tiempo reloj: 18324 microsegundos
+Tiempo CPU sistema total: 12000 microsegundos
+Tiempo CPU usuario total: 0 microsegundos
+Cantidad de Soft Page Faults: 85 
+Cantidad de Hard Page Faults: 0 
+Operaciones de entrada (en bloques): 0 
+Operaciones de salida (en bloques): 0 
+Mensajes IPC enviados: 0 
+Mensajes IPC recibidos: 0 
+
+SOCKETS (localhost)
+
+------------ Server ------------
+Tiempo reloj: 1501104 microsegundos
+Tiempo CPU sistema total: 24000 microsegundos
+Tiempo CPU usuario total: 0 microsegundos
+Cantidad de Soft Page Faults: 73 
+Cantidad de Hard Page Faults: 0 
+Operaciones de entrada (en bloques): 0 
+Operaciones de salida (en bloques): 0 
+Mensajes IPC enviados: 0 
+Mensajes IPC recibidos: 0 
+
+------------ Client ------------
+Tiempo reloj: 39299 microsegundos
+Tiempo CPU sistema total: 28000 microsegundos
+Tiempo CPU usuario total: 0 microsegundos
+Cantidad de Soft Page Faults: 76 
+Cantidad de Hard Page Faults: 0 
+Operaciones de entrada (en bloques): 0 
+Operaciones de salida (en bloques): 0 
+Mensajes IPC enviados: 0 
+Mensajes IPC recibidos: 0 
