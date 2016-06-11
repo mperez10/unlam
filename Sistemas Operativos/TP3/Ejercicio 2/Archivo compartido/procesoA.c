@@ -22,8 +22,8 @@ void imprimir(struct rusage *ru, time_t *t_total) {
 
 int main()
 {
-    char f1_dir[] = "/home/franco/Proyectos/Console/shared_file/file1";
-    char f2_dir[] = "/home/franco/Proyectos/Console/shared_file/file2";
+    char f1_dir[] = "./file1";
+    char f2_dir[] = "./file2";
     char msg[] = "A";
     char ans[sizeof(msg)];
     FILE *f1, *f2;
