@@ -27,6 +27,7 @@ int main() {
         acum.ru_nsignals += usage->ru_nsignals;
         acum.ru_nvcsw += usage->ru_nvcsw;
         acum.ru_nivcsw += usage->ru_nivcsw;
+        free(usage);
     }
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);

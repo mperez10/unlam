@@ -2,14 +2,14 @@
 
 int main()
 {
-    char buffer[TAM_BUFFER];
-    char msg[] = "B";
-    char *fifo1 = "/tmp/fifo2";
-    char *fifo2 = "/tmp/fifo1";
     int f1, f2;
     struct timespec inicio, fin;
     time_t t_total;
     struct rusage ru;
+    char msg[] = "B",
+        buffer[TAM_BUFFER];
+    char *fifo1 = "/tmp/fifo2";
+    char *fifo2 = "/tmp/fifo1";
     printf("------------ Proceso B ------------\n");
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);

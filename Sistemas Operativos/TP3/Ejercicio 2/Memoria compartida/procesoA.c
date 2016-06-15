@@ -2,26 +2,26 @@
 
 int main()
 {
-    char msg[] = "A", ans[sizeof(msg)];
+    char *msg = "A", ans;
     struct timespec inicio, fin;
     time_t t_total;
     struct rusage ru;
     sem_t *sem_x = sem_open("/sem_x", O_CREAT, 0666, 0),
             *sem_y = sem_open("/sem_y", O_CREAT, 0666, 0);
     int id = shmget((key_t)654, CANT_MENSAJES*sizeof(msg), IPC_CREAT | IPC_EXCL | 0666);
-    char (*vector)[sizeof(msg)] = (char *) shmat(id, NULL, 0);
+    char *vector = (char *) shmat(id, NULL, 0);
     printf("------------ Proceso A ------------\n");
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
     for(int i = 0; i < CANT_MENSAJES; i++)
     {
-        strcpy(vector[i], msg);
-        //printf("Se escribio %s en la posicion %d\n", msg, i);
-        sem_post(sem_x);
-        sem_wait(sem_y);
-        strcpy(ans, vector[i]);
-        //printf("Se leyo %s en la posicion %d\n", ans, i);
+        memcpy(&vector[i], msg, sizeof(*msg));
+        //printf("Se escribio %c en la posicion %d\n", vector[i], i);
+        sem_post(sem_x); // V(x)
+        sem_wait(sem_y); // P(y)
+        memcpy(&ans, &vector[i], sizeof(ans));
+        //printf("Se leyo %c en la posicion %d\n", vector[i], i);
     }
 
     shmdt(vector);

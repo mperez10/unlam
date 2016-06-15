@@ -32,7 +32,8 @@ int main() {
     // Continua el proceso Padre
 
     inicializarUsage(&acum);
-    for (int j = 0; j < CANT_PROCESOS; j++) {
+    for (int j = 0; j < CANT_PROCESOS; j++)
+    {
         wait3(NULL, 0, &usage);
         acum.ru_stime.tv_usec += usage.ru_stime.tv_usec;
         acum.ru_utime.tv_usec += usage.ru_utime.tv_usec;

@@ -1,6 +1,7 @@
 #include <utils.h>
 
-void imprimir(struct rusage *ru, time_t *t_total) {
+void imprimir(struct rusage *ru, time_t *t_total)
+{
     printf("Tiempo reloj: %ld microsegundos\n", *t_total);
     printf("Tiempo CPU sistema total: %ld microsegundos\n", ru->ru_stime.tv_usec);
     printf("Tiempo CPU usuario total: %ld microsegundos\n", ru->ru_utime.tv_usec);

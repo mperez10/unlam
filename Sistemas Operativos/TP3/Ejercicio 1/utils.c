@@ -14,7 +14,8 @@ void lectura(int *array)
         sum += array[i];
 }
 
-void *threadLectura(void *arg) {
+void *threadLectura(void *arg)
+{
     struct rusage *ru = (struct rusage*)malloc(sizeof(struct rusage));
     int *array = (int *)arg;
     lectura(array);
@@ -29,7 +30,8 @@ void escritura(int *array)
         array[i] *= ( rand() + 2);
 }
 
-void *threadEscritura(void *arg) {
+void *threadEscritura(void *arg)
+{
     struct rusage *ru = (struct rusage*)malloc(sizeof(struct rusage));
     int *array = (int *)arg;
     escritura(array);

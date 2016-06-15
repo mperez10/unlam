@@ -27,30 +27,30 @@ Cambios de contexto voluntarios: 2443
 Cambios de contexto involuntarios: 8644 
 
 ------------ Caso 3 ------------
-Tiempo reloj: 6301220 microsegundos
-Tiempo reloj promedio: 6301 microsegundos
+Tiempo reloj: 6959880 microsegundos
+Tiempo reloj promedio: 6959 microsegundos
 Tiempo CPU sistema total: 0 microsegundos
-Tiempo CPU usuario total: 2144000 microsegundos
+Tiempo CPU usuario total: 1792000 microsegundos
 Tiempo CPU sistema promedio: 0 microsegundos
-Tiempo CPU usuario promedio: 2144 microsegundos
-Cantidad de Soft Page Faults: 21 
+Tiempo CPU usuario promedio: 1792 microsegundos
+Cantidad de Soft Page Faults: 1 
 Cantidad de Hard Page Faults: 0 
 Cantidad de señales recibidas: 0 
 Cambios de contexto voluntarios: 0 
-Cambios de contexto involuntarios: 693 
+Cambios de contexto involuntarios: 525 
 
 ------------ Caso 4 ------------
-Tiempo reloj: 31148236 microsegundos
-Tiempo reloj promedio: 31148 microsegundos
+Tiempo reloj: 31139490 microsegundos
+Tiempo reloj promedio: 31139 microsegundos
 Tiempo CPU sistema total: 0 microsegundos
-Tiempo CPU usuario total: 27004000 microsegundos
+Tiempo CPU usuario total: 26976000 microsegundos
 Tiempo CPU sistema promedio: 0 microsegundos
-Tiempo CPU usuario promedio: 27004 microsegundos
-Cantidad de Soft Page Faults: 21 
+Tiempo CPU usuario promedio: 26976 microsegundos
+Cantidad de Soft Page Faults: 1 
 Cantidad de Hard Page Faults: 0 
 Cantidad de señales recibidas: 0 
 Cambios de contexto voluntarios: 0 
-Cambios de contexto involuntarios: 2650 
+Cambios de contexto involuntarios: 2675 
 
 
 
@@ -107,10 +107,10 @@ Mensajes IPC recibidos: 0
 MEMORIA COMPARTIDA:
 
 ------------ Proceso A ------------
-Tiempo reloj: 1313708 microsegundos
-Tiempo CPU sistema total: 8000 microsegundos
-Tiempo CPU usuario total: 4000 microsegundos
-Cantidad de Soft Page Faults: 132 
+Tiempo reloj: 2001431 microsegundos
+Tiempo CPU sistema total: 12000 microsegundos
+Tiempo CPU usuario total: 0 microsegundos
+Cantidad de Soft Page Faults: 126 
 Cantidad de Hard Page Faults: 0 
 Operaciones de entrada (en bloques): 0 
 Operaciones de salida (en bloques): 0 
@@ -118,9 +118,9 @@ Mensajes IPC enviados: 0
 Mensajes IPC recibidos: 0 
 
 ------------ Proceso B ------------
-Tiempo reloj: 39237 microsegundos
-Tiempo CPU sistema total: 12000 microsegundos
-Tiempo CPU usuario total: 0 microsegundos
+Tiempo reloj: 47098 microsegundos
+Tiempo CPU sistema total: 4000 microsegundos
+Tiempo CPU usuario total: 8000 microsegundos
 Cantidad de Soft Page Faults: 126 
 Cantidad de Hard Page Faults: 0 
 Operaciones de entrada (en bloques): 0 

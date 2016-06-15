@@ -11,7 +11,6 @@ int main()
     struct timespec inicio, fin;
     time_t t_total;
     struct rusage ru;
-    int pts = 0;
     printf("------------ Server ------------\n");
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);

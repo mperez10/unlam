@@ -2,16 +2,16 @@
 
 int main()
 {
-    char f1_dir[] = "./file1";
-    char f2_dir[] = "./file2";
-    char msg[] = "B";
-    char ans[sizeof(msg)];
     FILE *f1, *f2;
     struct stat st;
     off_t old_size;
     struct timespec inicio, fin;
     time_t t_total;
     struct rusage ru;
+    char f1_dir[] = "./file1";
+    char f2_dir[] = "./file2";
+    char msg[] = "B",
+        ans[sizeof(msg)];
     printf("------------ Proceso B ------------\n");
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
@@ -23,7 +23,8 @@ int main()
     for(int i = 0; i < CANT_MENSAJES; i++)
     {
         // printf("Esperando proceso A...\n");
-        do {
+        do
+        {
             stat(f1_dir, &st);
             // Espera a que el proceso A escriba el archivo f1 o primera iteracion
         } while(old_size == st.st_size && old_size != 0);
