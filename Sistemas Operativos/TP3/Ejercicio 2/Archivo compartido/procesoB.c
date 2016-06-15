@@ -1,24 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <time.h>
-#include <sys/resource.h>
-
-#define CANT_MENSAJES 1000
-
-void imprimir(struct rusage *ru, time_t *t_total) {
-    printf("Tiempo reloj: %ld microsegundos\n", *t_total);
-    printf("Tiempo CPU sistema total: %ld microsegundos\n", ru->ru_stime.tv_usec);
-    printf("Tiempo CPU usuario total: %ld microsegundos\n", ru->ru_utime.tv_usec);
-    printf("Cantidad de Soft Page Faults: %ld \n", ru->ru_minflt);
-    printf("Cantidad de Hard Page Faults: %ld \n", ru->ru_majflt);
-    printf("Operaciones de entrada (en bloques): %ld \n", ru->ru_inblock);
-    printf("Operaciones de salida (en bloques): %ld \n", ru->ru_oublock);
-    printf("Mensajes IPC enviados: %ld \n", ru->ru_msgsnd);
-    printf("Mensajes IPC recibidos: %ld \n", ru->ru_msgrcv);
-}
+#include <utils.h>
 
 int main()
 {
@@ -32,6 +12,7 @@ int main()
     struct timespec inicio, fin;
     time_t t_total;
     struct rusage ru;
+    printf("------------ Proceso B ------------\n");
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
@@ -58,10 +39,9 @@ int main()
 
     getrusage(RUSAGE_SELF, &ru);
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);
-    t_total = fin.tv_nsec - inicio.tv_nsec;
-    if (t_total < 0)
-        t_total += 1000000000;
-    t_total = t_total / 1000 + 1000000*(fin.tv_sec - inicio.tv_sec); // convierte a microsegundos
+
+    calcularTiempos(&inicio, &fin, &t_total);
     imprimir(&ru, &t_total);
+    
     return 0;
 }
