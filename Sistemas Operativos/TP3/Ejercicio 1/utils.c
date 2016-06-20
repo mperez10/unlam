@@ -4,7 +4,7 @@ void inicializar(int *array)
 {
     srand(time(NULL));
     for (int i = 0; i < TAM_ARRAY; i++)
-        array[i] = rand();
+        array[i] = rand() % 100;
 }
 
 void lectura(int *array)
@@ -16,38 +16,31 @@ void lectura(int *array)
 
 void *threadLectura(void *arg)
 {
-    struct rusage *ru = (struct rusage*)malloc(sizeof(struct rusage));
-    int *array = (int *)arg;
-    lectura(array);
-    getrusage(RUSAGE_THREAD, ru);
-    pthread_exit((void *)ru);
+    struct th_args *args = (struct th_args *)arg;
+    lectura(&(args->array));
+    pthread_exit(0);
 }
 
 void escritura(int *array)
 {
-    srand(time(NULL));
     for (int i = 0; i < TAM_ARRAY; i++)
-        array[i] *= ( rand() + 2);
+        array[i] *= rand() % 100 + 2;
 }
 
 void *threadEscritura(void *arg)
 {
-    struct rusage *ru = (struct rusage*)malloc(sizeof(struct rusage));
-    int *array = (int *)arg;
-    escritura(array);
-    getrusage(RUSAGE_THREAD, ru);
-    pthread_exit((void *)ru);
+    struct th_args *args = (struct th_args *)arg;
+    escritura(&(args->array));
+    pthread_exit(0);
 }
 
-void calcularTiempos(struct timespec *inicio, struct timespec *fin, struct rusage *acum, time_t *t_total, time_t *t_prom, long int *sprom, long int *uprom)
+void calcularTiempos(struct timespec *inicio, struct timespec *fin, struct rusage *ru, time_t *t_total, time_t *t_prom, long int *sprom, long int *uprom)
 {
     *t_total = fin->tv_nsec - inicio->tv_nsec; // nanosegundos
-    if (*t_total < 0)
-        *t_total += 1000000000;
     *t_total = *t_total / 1000 + 1000000 * (fin->tv_sec - inicio->tv_sec); // convierte a microsegundos
     *t_prom = *t_total / CANT_PROCESOS; // se desprecia un valor infimo
-    *sprom = acum->ru_stime.tv_usec / CANT_PROCESOS;
-    *uprom = acum->ru_utime.tv_usec / CANT_PROCESOS;
+    *sprom = ru->ru_stime.tv_usec / CANT_PROCESOS;
+    *uprom = ru->ru_utime.tv_usec / CANT_PROCESOS;
 }
 
 void imprimir(struct rusage *ru, time_t *t_total, time_t *t_prom, long int *sprom, long int *uprom)
@@ -74,4 +67,15 @@ void inicializarUsage(struct rusage *u)
     u->ru_nsignals = 0;
     u->ru_nvcsw = 0;
     u->ru_nivcsw = 0;
+}
+
+void acumUsage(struct rusage *acum, struct rusage *usage)
+{
+    acum->ru_stime.tv_usec += usage->ru_stime.tv_usec;
+    acum->ru_utime.tv_usec += usage->ru_utime.tv_usec;
+    acum->ru_minflt += usage->ru_minflt;
+    acum->ru_majflt += usage->ru_majflt;
+    acum->ru_nsignals += usage->ru_nsignals;
+    acum->ru_nvcsw += usage->ru_nvcsw;
+    acum->ru_nivcsw += usage->ru_nivcsw;
 }

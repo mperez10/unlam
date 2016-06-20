@@ -16,8 +16,6 @@ void imprimir(struct rusage *ru, time_t *t_total)
 void calcularTiempos(struct timespec *inicio, struct timespec *fin, time_t *t_total)
 {
     *t_total = fin->tv_nsec - inicio->tv_nsec;
-    if (*t_total < 0)
-        *t_total += 1000000000;
     *t_total = *t_total / 1000 + 1000000 * (fin->tv_sec - inicio->tv_sec); // convierte a microsegundos
 }
 

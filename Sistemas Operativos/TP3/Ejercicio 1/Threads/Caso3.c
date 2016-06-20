@@ -1,39 +1,32 @@
 #include <utils.h>
 
-int main() {
+int main()
+{
     int array[TAM_ARRAY];
     struct timespec inicio, fin;
     time_t t_total, t_prom;
     pthread_t tid[CANT_PROCESOS];
     long int sprom, uprom;
-    struct rusage *usage, acum;
-    void *returnValue;
+    struct rusage *usage;
+    struct th_args args;
     printf("------------ Caso 3 ------------\n");
-
-    inicializar(array);
-    inicializarUsage(&acum);
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
+    inicializar(array);
+    inicializarUsage(&(args.usage));
+
     for (int i = 0; i < CANT_PROCESOS; i++)
     {
-        pthread_create(&tid[i], NULL, threadLectura, (void *) array);
-        pthread_join(tid[i], &returnValue);
-        usage = (struct rusage*)returnValue;
-        acum.ru_stime.tv_usec += usage->ru_stime.tv_usec;
-        acum.ru_utime.tv_usec += usage->ru_utime.tv_usec;
-        acum.ru_minflt += usage->ru_minflt;
-        acum.ru_majflt += usage->ru_majflt;
-        acum.ru_nsignals += usage->ru_nsignals;
-        acum.ru_nvcsw += usage->ru_nvcsw;
-        acum.ru_nivcsw += usage->ru_nivcsw;
-        free(usage);
+        pthread_create(&tid[i], NULL, threadLectura, (void *) &args);
+        pthread_join(tid[i], NULL);
     }
 
+    getrusage(RUSAGE_SELF, &(args.usage));
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);
 
-    calcularTiempos(&inicio, &fin, &acum, &t_total, &t_prom, &sprom, &uprom);
-    imprimir(&acum, &t_total, &t_prom, &sprom, &uprom);
+    calcularTiempos(&inicio, &fin, &(args.usage), &t_total, &t_prom, &sprom, &uprom);
+    imprimir(&(args.usage), &t_total, &t_prom, &sprom, &uprom);
     
     return 0;
 }

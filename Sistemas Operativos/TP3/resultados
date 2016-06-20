@@ -1,56 +1,56 @@
 EJERCICIO 1:
 
 ------------ Caso 1 ------------
-Tiempo reloj: 1819893 microsegundos
-Tiempo reloj promedio: 1819 microsegundos
-Tiempo CPU sistema total: 356000 microsegundos
-Tiempo CPU usuario total: 3652000 microsegundos
-Tiempo CPU sistema promedio: 356 microsegundos
-Tiempo CPU usuario promedio: 3652 microsegundos
-Cantidad de Soft Page Faults: 19771 
+Tiempo reloj: 158028 microsegundos
+Tiempo reloj promedio: 158 microsegundos
+Tiempo CPU sistema total: 32000 microsegundos
+Tiempo CPU usuario total: 4000 microsegundos
+Tiempo CPU sistema promedio: 32 microsegundos
+Tiempo CPU usuario promedio: 4 microsegundos
+Cantidad de Soft Page Faults: 3796 
 Cantidad de Hard Page Faults: 0 
 Cantidad de señales recibidas: 0 
-Cambios de contexto voluntarios: 999 
-Cambios de contexto involuntarios: 2922 
+Cambios de contexto voluntarios: 1000 
+Cambios de contexto involuntarios: 12 
 
 ------------ Caso 2 ------------
-Tiempo reloj: 7473977 microsegundos
-Tiempo reloj promedio: 7473 microsegundos
-Tiempo CPU sistema total: 1876000 microsegundos
-Tiempo CPU usuario total: 23092000 microsegundos
-Tiempo CPU sistema promedio: 1876 microsegundos
-Tiempo CPU usuario promedio: 23092 microsegundos
-Cantidad de Soft Page Faults: 486261 
+Tiempo reloj: 381640 microsegundos
+Tiempo reloj promedio: 381 microsegundos
+Tiempo CPU sistema total: 28000 microsegundos
+Tiempo CPU usuario total: 8000 microsegundos
+Tiempo CPU sistema promedio: 28 microsegundos
+Tiempo CPU usuario promedio: 8 microsegundos
+Cantidad de Soft Page Faults: 3991 
 Cantidad de Hard Page Faults: 0 
 Cantidad de señales recibidas: 0 
-Cambios de contexto voluntarios: 2443 
-Cambios de contexto involuntarios: 8644 
+Cambios de contexto voluntarios: 1000 
+Cambios de contexto involuntarios: 5 
 
 ------------ Caso 3 ------------
-Tiempo reloj: 6959880 microsegundos
-Tiempo reloj promedio: 6959 microsegundos
-Tiempo CPU sistema total: 0 microsegundos
-Tiempo CPU usuario total: 1792000 microsegundos
-Tiempo CPU sistema promedio: 0 microsegundos
-Tiempo CPU usuario promedio: 1792 microsegundos
-Cantidad de Soft Page Faults: 1 
+Tiempo reloj: 83143 microsegundos
+Tiempo reloj promedio: 83 microsegundos
+Tiempo CPU sistema total: 20000 microsegundos
+Tiempo CPU usuario total: 64000 microsegundos
+Tiempo CPU sistema promedio: 20 microsegundos
+Tiempo CPU usuario promedio: 64 microsegundos
+Cantidad de Soft Page Faults: 299 
 Cantidad de Hard Page Faults: 0 
 Cantidad de señales recibidas: 0 
-Cambios de contexto voluntarios: 0 
-Cambios de contexto involuntarios: 525 
+Cambios de contexto voluntarios: 1000 
+Cambios de contexto involuntarios: 1016 
 
 ------------ Caso 4 ------------
-Tiempo reloj: 31139490 microsegundos
-Tiempo reloj promedio: 31139 microsegundos
-Tiempo CPU sistema total: 0 microsegundos
-Tiempo CPU usuario total: 26976000 microsegundos
-Tiempo CPU sistema promedio: 0 microsegundos
-Tiempo CPU usuario promedio: 26976 microsegundos
-Cantidad de Soft Page Faults: 1 
+Tiempo reloj: 348138 microsegundos
+Tiempo reloj promedio: 348 microsegundos
+Tiempo CPU sistema total: 12000 microsegundos
+Tiempo CPU usuario total: 336000 microsegundos
+Tiempo CPU sistema promedio: 12 microsegundos
+Tiempo CPU usuario promedio: 336 microsegundos
+Cantidad de Soft Page Faults: 297 
 Cantidad de Hard Page Faults: 0 
 Cantidad de señales recibidas: 0 
-Cambios de contexto voluntarios: 0 
-Cambios de contexto involuntarios: 2675 
+Cambios de contexto voluntarios: 1000 
+Cambios de contexto involuntarios: 1045 
 
 
 

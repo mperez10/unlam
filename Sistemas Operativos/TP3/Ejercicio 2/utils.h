@@ -1,12 +1,10 @@
 #ifndef TP3EJ2_H
     #define TP3EJ2_H
-    
-    //#define _GNU_SOURCE
 
     #define CANT_MENSAJES 1000
     #define TAM_BUFFER 100
     #define SERVER_PORT 5000
-    #define SERVER_IP "127.0.0.1"
+    #define SERVER_IP "181.46.104.101"
     #define MAX_QUEUE 5
 
     #include <stdio.h>
