@@ -15,18 +15,24 @@ int main()
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
     mkfifo(fifo1, 0666);
+    mkfifo(fifo2, 0666);
+    // Crea los archivos FIFO
+
     for(int i = 0; i < CANT_MENSAJES; i++)
     {
         f1 = open(fifo1, O_WRONLY);
         write(f1, msg, sizeof(msg));
-        //printf("Se envio el mensaje: %s\n", msg);
+        // Envía el mensaje al buffer
         close(f1);
-        unlink(fifo1);
         f2 = open(fifo2, O_RDONLY);
         read(f2, (void *) buffer, sizeof(buffer));
-        //printf("Se recibio el mensaje: %s\n", buffer);
+        // Recibe el mensaje del buffer
         close(f2);
     }
+
+    unlink(fifo1);
+    unlink(fifo2);
+    // Elimina los archivos FIFO
 
     getrusage(RUSAGE_SELF, &ru);
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);

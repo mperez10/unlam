@@ -17,10 +17,12 @@ int main()
     for (int i = 0; i < CANT_PROCESOS; i++)
     {
         pid[i] = fork();
-        if (pid[i] == 0) // Proceso Hijo
+        // Se crea un nuevo proceso igual
+        // (solo cambia el valor de pid[i])
+        if (pid[i] == 0)
         {
+            // Proceso Hijo: Realiza las operaciones y finaliza
             lectura(array);
-            //i = CANT_PROCESOS;
             return 0;
         }
         else if (pid[i] == -1)
@@ -30,10 +32,11 @@ int main()
         }
         else
         {
-            // Proceso Padre
+            // Proceso Padre: Espera a los hijos que terminen uno por uno
+            // en cada iteración del ciclo for.
             wait(NULL);
         }
-    }   
+    }
 
     getrusage(RUSAGE_SELF, &usage);
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);

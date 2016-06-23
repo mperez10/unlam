@@ -2,7 +2,7 @@
 
 int main()
 {
-    int array[TAM_ARRAY];  
+    int array[TAM_ARRAY];
     struct timespec inicio, fin;
     time_t t_total, t_prom;
     long int sprom, uprom;
@@ -17,10 +17,9 @@ int main()
     for (int i = 0; i < CANT_PROCESOS; i++)
     {
         pid[i] = fork();
-        if (pid[i] == 0) // Proceso Hijo
+        if (pid[i] == 0)
         {
             escritura(array);
-            //i = CANT_PROCESOS;
             return 0;
         }
         else if (pid[i] == -1)
@@ -30,7 +29,6 @@ int main()
         }
         else
         {
-            // Proceso Padre
             wait(NULL);
         }
     }

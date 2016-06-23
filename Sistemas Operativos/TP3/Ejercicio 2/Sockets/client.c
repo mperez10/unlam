@@ -13,6 +13,7 @@ int main()
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
+    // Intenta crear el socket
     if(server_socket == -1) {
         printf("No se pudo crear el socket\n");
         return 1;
@@ -20,22 +21,23 @@ int main()
 
     setClientAddr(&server_addr, SERVER_IP, SERVER_PORT);
     if(connect(server_socket, (struct sockaddr *) &server_addr, sizeof(server_addr)) == -1) {
+        // Intenta conectar al servidor
         printf("No se pudo conectar al servidor\n");
         return 1;
     }
 
     // Conexion lista
-
     for (int i = 0; i < CANT_MENSAJES; ++i)
     {
         memset(buffer, 0, sizeof(buffer));
         recv(server_socket, buffer, sizeof(buffer), 0);
-        //printf("Recibido: %s\n", buffer);
+        // Recibe el mensaje del servidor (bloqueante)
         send(server_socket, "C", 1, 0);
-        //printf("Enviado\n");
+        // Envia el mensaje al servidor (no bloqueante)
     }
 
     close(server_socket);
+    // Destruye el socket
 
     getrusage(RUSAGE_SELF, &ru);
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);

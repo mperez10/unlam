@@ -31,5 +31,7 @@
     void imprimir(struct rusage *ru, time_t *t_total);
     void calcularTiempos(struct timespec *inicio, struct timespec *fin, time_t *t_total);
     void setClientAddr(struct sockaddr_in *client_addr, const char *ip, int port);
+    // Incializa la estructura de dirección del cliente.
     void setServerAddr(struct sockaddr_in *server_addr, int port);
+    // Incializa la estructura de dirección del servidor.
 #endif

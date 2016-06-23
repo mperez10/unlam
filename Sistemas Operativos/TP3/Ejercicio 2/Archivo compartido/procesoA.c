@@ -30,7 +30,6 @@ int main()
     {
         fprintf(f1 ,"%s", msg);
         fflush(f1);
-        // printf("Esperando proceso B...\n");
         do
         {
             stat(f2_dir, &st);
@@ -38,7 +37,6 @@ int main()
         } while(old_size == st.st_size);
         old_size = st.st_size;
         fread(ans, sizeof(char), 30, f2);
-        // printf("Lectura completa\n");
     }
 
     fclose(f1);

@@ -16,29 +16,38 @@ int main()
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
-    if(server_socket == -1) // retorna -1 cuando no puede crear el socket
+    // Intenta crear el socket
+    if(server_socket == -1) {
+        printf("No se pudo crear el socket\n");
         return 1;
+    }
 
     setServerAddr(&server_addr, SERVER_PORT);
 
     bind(server_socket, (struct sockaddr *)&server_addr, sizeof(struct sockaddr_in));
+    // Asocia el file descriptor (server_socket) con
+    // la estructura de dirección del socket
+
     listen(server_socket, MAX_QUEUE);
+    // El socket comienza a escuchar conexiones de clientes
+    
     client_addr_len = sizeof(client_addr);
     client_socket = accept(server_socket, (struct sockaddr *) &client_addr, &client_addr_len);
+    // Acepta la conexión de un cliente (bloqueante)
 
     // Conexion lista
-
     for (int i = 0; i < CANT_MENSAJES; ++i)
     {
         send(client_socket, "S", 1, 0);
-        //printf("Enviado\n");
+        // Envía el mensaje al cliente
         memset(buffer, 0, sizeof(buffer));
         recv(client_socket, buffer, sizeof(buffer), 0);
-        //printf("Recibido: %s\n", buffer);
+        // Recibe el mensaje del cliente
     }
 
     close(client_socket);
     close(server_socket);
+    // Destruye los sockets
 
     getrusage(RUSAGE_SELF, &ru);
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);

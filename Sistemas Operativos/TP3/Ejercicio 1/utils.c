@@ -16,8 +16,8 @@ void lectura(int *array)
 
 void *threadLectura(void *arg)
 {
-    struct th_args *args = (struct th_args *)arg;
-    lectura(&(args->array));
+    struct rusage *usage = (struct rusage *)arg;
+    lectura(usage);
     pthread_exit(0);
 }
 
@@ -29,21 +29,24 @@ void escritura(int *array)
 
 void *threadEscritura(void *arg)
 {
-    struct th_args *args = (struct th_args *)arg;
-    escritura(&(args->array));
+    struct rusage *usage = (struct rusage *)arg;
+    escritura(usage);
     pthread_exit(0);
 }
 
-void calcularTiempos(struct timespec *inicio, struct timespec *fin, struct rusage *ru, time_t *t_total, time_t *t_prom, long int *sprom, long int *uprom)
+void calcularTiempos(struct timespec *inicio, struct timespec *fin, struct rusage *ru,
+    time_t *t_total, time_t *t_prom, long int *sprom, long int *uprom)
 {
-    *t_total = fin->tv_nsec - inicio->tv_nsec; // nanosegundos
-    *t_total = *t_total / 1000 + 1000000 * (fin->tv_sec - inicio->tv_sec); // convierte a microsegundos
+    *t_total = fin->tv_nsec - inicio->tv_nsec;
+    *t_total = *t_total / 1000 + 1000000 * (fin->tv_sec - inicio->tv_sec);
+    // convierte a microsegundos
     *t_prom = *t_total / CANT_PROCESOS; // se desprecia un valor infimo
     *sprom = ru->ru_stime.tv_usec / CANT_PROCESOS;
     *uprom = ru->ru_utime.tv_usec / CANT_PROCESOS;
 }
 
-void imprimir(struct rusage *ru, time_t *t_total, time_t *t_prom, long int *sprom, long int *uprom)
+void imprimir(struct rusage *ru, time_t *t_total, time_t *t_prom,
+    long int *sprom, long int *uprom)
 {
     printf("Tiempo reloj: %ld microsegundos\n", *t_total);
     printf("Tiempo reloj promedio: %ld microsegundos\n", *t_prom);

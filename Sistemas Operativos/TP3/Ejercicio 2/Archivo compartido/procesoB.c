@@ -22,15 +22,14 @@ int main()
     old_size = 0;
     for(int i = 0; i < CANT_MENSAJES; i++)
     {
-        // printf("Esperando proceso A...\n");
         do
         {
             stat(f1_dir, &st);
-            // Espera a que el proceso A escriba el archivo f1 o primera iteracion
+            // Espera a que el proceso A escriba el archivo f1
+            // o que sea la primera iteración.
         } while(old_size == st.st_size && old_size != 0);
         old_size = st.st_size;
         fread(ans, sizeof(char), 30, f1);
-        // printf("Lectura completa\n");
         fprintf(f2 ,"%s", msg);
         fflush(f2);
     }

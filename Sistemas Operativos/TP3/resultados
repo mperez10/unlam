@@ -83,8 +83,8 @@ Mensajes IPC recibidos: 0
 FIFO COMPARTIDO:
 
 ------------ Proceso A ------------
-Tiempo reloj: 2996617 microsegundos
-Tiempo CPU sistema total: 4000 microsegundos
+Tiempo reloj: 2017867 microsegundos
+Tiempo CPU sistema total: 20000 microsegundos
 Tiempo CPU usuario total: 0 microsegundos
 Cantidad de Soft Page Faults: 112 
 Cantidad de Hard Page Faults: 0 
@@ -94,10 +94,10 @@ Mensajes IPC enviados: 0
 Mensajes IPC recibidos: 0 
 
 ------------ Proceso B ------------
-Tiempo reloj: 8779 microsegundos
-Tiempo CPU sistema total: 8000 microsegundos
+Tiempo reloj: 49300 microsegundos
+Tiempo CPU sistema total: 16000 microsegundos
 Tiempo CPU usuario total: 0 microsegundos
-Cantidad de Soft Page Faults: 112 
+Cantidad de Soft Page Faults: 113 
 Cantidad de Hard Page Faults: 0 
 Operaciones de entrada (en bloques): 0 
 Operaciones de salida (en bloques): 0 

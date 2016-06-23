@@ -5,28 +5,29 @@ int main()
     int array[TAM_ARRAY];
     struct timespec inicio, fin;
     time_t t_total, t_prom;
-    pthread_t tid[CANT_PROCESOS];
     long int sprom, uprom;
-    struct rusage *usage;
-    struct th_args args;
+    struct rusage usage;
+    pthread_t tid[CANT_PROCESOS];
     printf("------------ Caso 3 ------------\n");
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &inicio);
 
     inicializar(array);
-    inicializarUsage(&(args.usage));
 
     for (int i = 0; i < CANT_PROCESOS; i++)
     {
-        pthread_create(&tid[i], NULL, threadLectura, (void *) &args);
+        pthread_create(&tid[i], NULL, threadLectura, (void *) &usage);
+        // Crea un thread que ejecuta la función threadLectura
+        // con los parámetros pasados
         pthread_join(tid[i], NULL);
+        // Espera a que el thread termine su ejecución
     }
 
-    getrusage(RUSAGE_SELF, &(args.usage));
+    getrusage(RUSAGE_SELF, &usage);
     clock_gettime(CLOCK_MONOTONIC_RAW, &fin);
 
-    calcularTiempos(&inicio, &fin, &(args.usage), &t_total, &t_prom, &sprom, &uprom);
-    imprimir(&(args.usage), &t_total, &t_prom, &sprom, &uprom);
+    calcularTiempos(&inicio, &fin, &usage, &t_total, &t_prom, &sprom, &uprom);
+    imprimir(&usage, &t_total, &t_prom, &sprom, &uprom);
     
     return 0;
 }
